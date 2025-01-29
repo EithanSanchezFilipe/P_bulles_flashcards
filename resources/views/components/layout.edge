@@ -11,5 +11,6 @@
   </head>
   <body>
     @include('partials/header')
+    {{{ await $slots.main() }}}
   </body>
 </html>

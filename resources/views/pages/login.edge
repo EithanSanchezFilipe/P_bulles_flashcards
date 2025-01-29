@@ -1,2 +1,11 @@
 @component('components/layout', {title: 'Se connecter'})
+  <h3>
+    Se connecter
+  </h3>
+  <form action="" method="POST">
+    @!component('components/input', {name : 'username', label : 'Nom d\'utilisateur'})
+    @!component('components/input', {name : 'email', label : 'Email', type : 'email'})
+    @!component('components/input', {name : 'password', label : 'Mot de passe', type : 'password'})
+    <button type="submit">Se connecter</button>
+  </form>
 @endcomponent
