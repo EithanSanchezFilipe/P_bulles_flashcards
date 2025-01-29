@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 * {
   margin: 0;
   padding: 0;
@@ -7,6 +8,10 @@ html,
 body {
   height: 100%;
   width: 100%;
+}
+a {
+  text-decoration: none;
+  font-family: 'Roboto';
 }
 nav {
   display: flex;
@@ -22,4 +27,24 @@ nav a img {
   justify-content: space-between;
   align-items: center;
   gap: 20px;
+}
+#user-buttons * {
+  border-radius: 20px;
+  padding: 1em;
+}
+#login-button {
+  border: 1px black solid;
+  color: black;
+}
+#register-button {
+  background-color: #6cc247;
+  color: white;
+}
+#user-buttons *:hover {
+  box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+  transition: 0.1s ease;
+}
+#register-button:hover {
+  background-color: #4e8c33;
+  transition: 0.3s ease;
 }
