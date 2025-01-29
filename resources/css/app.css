@@ -8,3 +8,18 @@ body {
   height: 100%;
   width: 100%;
 }
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+nav a img {
+  padding: 10px;
+}
+#user-buttons {
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
