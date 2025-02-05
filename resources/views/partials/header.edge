@@ -1,11 +1,16 @@
 <header>
   <nav>
-    <a href="">      <img src="/img/fullnameLogo.png" alt="" style="height: 40px" /></a>
+    <a href="{{ route('home') }}">      <img src="/img/fullnameLogo.png" alt="" style="height: 40px" /></a>
     <div id="user-buttons">
-      @if(auth.isAuthenticated)
-        {
-        <a href="" id="deconnect-button">Se déconnecter</a>
-        }
-      </div>
-    </nav>
-  </header>
+      @if(isAuthenticated)
+        {{ auth.user.username }} ({{auth.user.isAdmin ? 'admin' : 'user'}})
+        <form action="{{ route('auth.handleLogout') }}" method="POST">
+          {{ csrfField() }}
+          <button type="submit">Se déconnecter</button>
+        </form>
+      @else
+        <button>          <a href="{{ route('auth.showLogin') }}">Se connecter</a></button>
+      @endif
+    </div>
+  </nav>
+</header>
