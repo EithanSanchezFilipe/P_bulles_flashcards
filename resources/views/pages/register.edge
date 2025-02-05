@@ -1,0 +1,14 @@
+@component('components/layout', {title: 'Se connecter'})
+  <h3>
+    Se connecter
+  </h3>
+  <form action="{{ route('auth.handleRegister') }}" method="POST">
+    {{ csrfField() }}
+    @!component('components/input', {name : 'username', label : 'Nom d\'utilisateur', value: old('username')})
+    @!component('components/input', {name: 'email', label: 'Email',type: 'email', value: old('email')})
+    @!component('components/input', {name : 'password', label : 'Mot de passe', type : 'password'})
+    @!component('components/input', {name : 'confirmPassword', label : 'Confirmez votre mot de passe', type : 'password'})
+
+    <button type="submit">S'inscrire</button>
+  </form>
+@endcomponent

@@ -21,3 +21,8 @@ router
   .post('/logout', [AuthController, 'handleLogout'])
   .as('auth.handleLogout')
   .use(middleware.auth())
+router.on('/register').render('pages/register').as('auth.showRegister').use(middleware.guest())
+router
+  .post('/register', [AuthController, 'handleRegister'])
+  .as('auth.handleRegister')
+  .use(middleware.guest())

@@ -9,7 +9,8 @@
           <button type="submit">Se déconnecter</button>
         </form>
       @else
-        <button>          <a href="{{ route('auth.showLogin') }}">Se connecter</a></button>
+        <a href="{{ route('auth.showLogin') }}">Se connecter</a>
+        <a href="{{ route('auth.showRegister') }}">Créer un compte</a>
       @endif
     </div>
   </nav>

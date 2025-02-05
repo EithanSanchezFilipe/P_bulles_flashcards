@@ -1,9 +1,17 @@
 <div class="form-group">
+  @inputError(name)
+    @each(message in $messages)
+      <p class="input-error">
+        {{ message }}
+      </p>
+    @end
+  @end
   <label for="{{ name }}">{{ label }}</label>
   <input
     type="{{ type || 'text' }}"
     name="{{ name }}"
     id="{{ name }}"
+    value="{{ value || '' }}"
     class="{{ cls || 'form-control' }}"
   />
 </div>
