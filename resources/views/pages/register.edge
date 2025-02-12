@@ -1,16 +1,18 @@
 @component('components/layout', {title: 'Créer un compte'})
-  <h3>
-    Créer un compte
-  </h3>
-  <form action="{{ route('auth.handleRegister') }}" method="POST" id="registerForm">
-    {{ csrfField() }}
-    @!component('components/input', {name : 'username', label : 'Nom d\'utilisateur', value: old('username')})
-    @!component('components/input', {name: 'email', label: 'Email', value: old('email')})
-    @!component('components/input', {name : 'password', label : 'Mot de passe', type : 'password'})
-    @!component('components/input', {name : 'confirmPassword', label : 'Confirmez votre mot de passe', type : 'password'})
+  <div id="auth-container">
+    <h3>
+      Créer un compte
+    </h3>
+    <form action="{{ route('auth.handleRegister') }}" method="POST" id="registerForm">
+      {{ csrfField() }}
+      @!component('components/input', {name : 'username', label : 'Nom d\'utilisateur', value: old('username')})
+      @!component('components/input', {name : 'email', label : 'Email', value: old('email')})
+      @!component('components/input', {name : 'password', label : 'Mot de passe', type : 'password'})
+      @!component('components/input', {name : 'confirmPassword', label : 'Confirmez votre mot de passe', type : 'password'})
 
-    <button type="submit" id="submit-btn">S'inscrire</button>
-  </form>
+      <button type="submit" id="submit-btn">S'inscrire</button>
+    </form>
+  </div>
   <script>
     const form = document.getElementById("registerForm");
     
@@ -23,7 +25,6 @@
     const confirmPasswordInput = form.querySelector("input[name='confirmPassword']");
     
     const inputs = form.querySelectorAll("input");
-    // Fonction pour vérifier les conditions
     
     function checkFields() {
       let usernameValid = usernameInput.value.trim() !== "";
@@ -35,12 +36,10 @@
         submitButton.style.display = "none";
       }
     }
-    // Vérification à chaque modification d'un champ
     
     inputs.forEach(input => {
       input.addEventListener("input", checkFields);
     });
-    // Vérification initiale
     
     checkFields();
   </script>

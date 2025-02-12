@@ -1,12 +1,14 @@
 <header>
   <nav>
-    <a href="{{ route('home') }}">      <img src="/img/fullnameLogo.png" alt="" style="height: 40px" /></a>
+    <a href="{{ route('home') }}">
+      <img src="/img/fullnameLogo.png" alt="" style="height: 40px" />
+    </a>
     <div id="user-buttons">
       @if(isAuthenticated)
-        {{ auth.user.username }} ({{auth.user.isAdmin ? 'admin' : 'user'}})
+        {{ auth.user.username }} ({{ auth.user.isAdmin ? 'admin' : 'user' }})
         <form action="{{ route('auth.handleLogout') }}" method="POST">
           {{ csrfField() }}
-          <button type="submit">Se déconnecter</button>
+          <button type="submit" id="logout-btn">Se déconnecter</button>
         </form>
       @else
         <a href="{{ route('auth.showLogin') }}">Se connecter</a>

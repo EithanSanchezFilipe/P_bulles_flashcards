@@ -13,7 +13,7 @@ const AuthFinder = withAuthFinder(() => hash.use('scrypt'), {
 
 export default class User extends compose(BaseModel, AuthFinder) {
   @hasMany(() => Deck)
-  declare user: HasMany<typeof Deck>
+  declare decks: HasMany<typeof Deck>
   @column({ isPrimary: true })
   declare id: number
 
