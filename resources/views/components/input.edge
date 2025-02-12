@@ -1,4 +1,5 @@
 <div class="form-group">
+  <label for="{{ name }}">{{ label }}</label>
   @inputError(name)
     @each(message in $messages)
       <p class="input-error">
@@ -6,7 +7,6 @@
       </p>
     @end
   @end
-  <label for="{{ name }}">{{ label }}</label>
   <input
     type="{{ type || 'text' }}"
     name="{{ name }}"

@@ -2,7 +2,7 @@
   <h3>
     Se connecter
   </h3>
-  <form action="{{ route('auth.handleLogin') }}" method="POST">
+  <form action="{{ route('auth.handleLogin') }}" method="POST" id="loginForm">
     {{ csrfField() }}
     @!component('components/input', {name : 'username', label : 'Nom d\'utilisateur'})
     @!component('components/input', {name : 'password', label : 'Mot de passe', type : 'password'})

@@ -1,44 +1,178 @@
+/* Importation des polices Google */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* Réinitialisation des marges et des paddings */
 * {
   margin: 0;
   padding: 0;
 }
 
+/* Styles généraux pour le corps de la page */
 html,
 body {
   height: 100%;
   width: 100%;
+  font-family: 'Roboto', sans-serif;
 }
+
+/* Styles pour les liens */
 a {
   text-decoration: none;
-  font-family: 'Roboto';
+  font-family: 'Roboto', sans-serif;
 }
+
+/* Navigation */
 nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 10px 20px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
+
+/* Logo dans la navigation */
 nav a img {
   padding: 10px;
+  height: 40px;
 }
+
+/* Conteneur des boutons de l'utilisateur */
 #user-buttons {
-  padding: 10px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
   gap: 20px;
 }
-#deconnect-button {
-  border: 1px black solid;
-  color: black;
-  border-radius: 20px;
-  padding: 1em;
+
+/* Styles des boutons de déconnexion et des liens */
+#user-buttons a,
+#user-buttons button {
+  text-decoration: none;
+  color: #333;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+  display: inline-block;
+  border: none;
 }
 
-#deconnect-button:hover {
-  box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
-  transition: 0.1s ease;
+/* Hover et focus des liens et boutons */
+#user-buttons a:hover,
+#user-buttons button:hover {
+  background-color: #4caf50;
+  color: white;
 }
+
+/* Style pour le bouton de déconnexion */
+#user-buttons button {
+  background-color: #ff5c5c; /* Couleur rouge pour le bouton de déconnexion */
+  color: white;
+  margin-top: 0px;
+}
+
+#user-buttons button:focus {
+  outline: none;
+}
+
+/* Style pour les liens de connexion/création de compte */
+#user-buttons a {
+  background-color: #008cba; /* Couleur bleue pour les liens de connexion/création de compte */
+  color: white;
+}
+
+#user-buttons a:focus {
+  outline: none;
+}
+
+/* Formulaires d'inscription et de connexion */
+#registerForm,
+#loginForm {
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  margin: auto;
+  box-sizing: border-box;
+}
+
+h3 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
+}
+
+/* Formulaires de saisie */
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+input[type='text'],
+input[type='email'],
+input[type='password'] {
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  width: 100%;
+  box-sizing: border-box;
+  transition: border-color 0.3s;
+}
+
+input[type='text']:focus,
+input[type='email']:focus,
+input[type='password']:focus {
+  border-color: #4caf50;
+  outline: none;
+}
+
+input[type='text']::placeholder,
+input[type='email']::placeholder,
+input[type='password']::placeholder {
+  color: #aaa;
+}
+
+input[type='text']:invalid,
+input[type='email']:invalid,
+input[type='password']:invalid {
+  border-color: red;
+}
+
+input[type='text']:valid,
+input[type='email']:valid,
+input[type='password']:valid {
+  border-color: #4caf50;
+}
+
+/* Bouton de soumission */
+button[type='submit'] {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 20px;
+}
+button[type='submit']:hover {
+  background-color: #45a049;
+}
+
+/* Styles d'erreur pour les champs de saisie */
 .input-error {
   color: red;
+  font-size: 16px;
 }
