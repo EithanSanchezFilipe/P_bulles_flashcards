@@ -21,8 +21,7 @@ export default class AuthController {
   }
 
   async handleRegister({ request, auth, session, response }: HttpContext) {
-    const { username, email, password, confirmPassword } =
-      await request.validateUsing(registerUserValidator)
+    const { username, email, password } = await request.validateUsing(registerUserValidator)
 
     await User.create({ username: username, email: email, password: password })
 
