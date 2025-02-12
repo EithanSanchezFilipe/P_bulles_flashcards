@@ -1,6 +1,6 @@
-@component('components/layout', {title: 'Se connecter'})
+@component('components/layout', {title: 'Créer un compte'})
   <h3>
-    Se connecter
+    Créer un compte
   </h3>
   <form action="{{ route('auth.handleRegister') }}" method="POST" id="registerForm">
     {{ csrfField() }}
