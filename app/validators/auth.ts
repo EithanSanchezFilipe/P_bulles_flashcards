@@ -4,7 +4,10 @@ import { customErrorMessage } from '#start/validator'
 vine.messagesProvider = customErrorMessage
 const loginUserValidator = vine.compile(
   vine.object({
-    username: vine.string(),
+    username: vine.string().exists(async (db, value) => {
+      const user = await db.from('users').where('username', value).first()
+      return user
+    }),
     password: vine.string().minLength(8),
   })
 )
