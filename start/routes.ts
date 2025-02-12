@@ -27,3 +27,4 @@ router
   .post('/register', [AuthController, 'handleRegister'])
   .as('auth.handleRegister')
   .use(middleware.guest())
+router.get('/deck/:id', [DecksController, 'getDeckById']).as('deck.get').use(middleware.auth())

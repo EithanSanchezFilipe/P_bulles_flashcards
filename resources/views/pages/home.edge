@@ -1,7 +1,8 @@
 @component('components/layout', {title: 'home'})
   <div id="decks">
     @each((deck, index) in decks)
-      <form action="">
+      <form action="{{ route('deck.get', {id: deck.id}) }}" method="GET">
+        {{ csrfField() }}
         <button type="submit">
           <div class="deck-container">
             <h4>

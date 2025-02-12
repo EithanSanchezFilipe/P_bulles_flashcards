@@ -9,6 +9,15 @@ export default class Card extends BaseModel {
   @column({ isPrimary: true })
   declare id: number
 
+  @column()
+  declare key: string
+
+  @column()
+  declare value: string
+
+  @column()
+  declare deckId: number
+
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
 

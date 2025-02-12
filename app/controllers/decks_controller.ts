@@ -22,4 +22,12 @@ export default class DecksController {
     const decks = user?.decks
     return view.render('pages/home', { decks })
   }
+  async getDeckById({ params, view }: HttpContext) {
+    const deck = await Deck.findOrFail(params.id)
+
+    await deck.load('card')
+    const cards = deck?.card
+
+    return view.render('pages/deck')
+  }
 }
