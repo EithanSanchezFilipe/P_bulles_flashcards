@@ -28,3 +28,5 @@ router
   .as('auth.handleRegister')
   .use(middleware.guest())
 router.get('/deck/:id', [DecksController, 'getDeckById']).as('deck.get').use(middleware.auth())
+router.on('/deck').render('pages/create_deck').as('deck.showCreateDeck').use(middleware.auth())
+router.post('/deck', [DecksController, 'createDeck']).as('deck.createDeck').use(middleware.auth())

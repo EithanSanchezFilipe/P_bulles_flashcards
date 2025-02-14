@@ -91,7 +91,8 @@ nav a img {
 
 /* Formulaires d'inscription et de connexion */
 #registerForm,
-#loginForm {
+#loginForm,
+.form {
   background-color: #ffffff;
   padding: 30px;
   border-radius: 8px;
