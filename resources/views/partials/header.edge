@@ -6,9 +6,12 @@
     <div id="user-buttons">
       @if(isAuthenticated)
         {{ auth.user.username }} ({{ auth.user.isAdmin ? 'admin' : 'user' }})
+        <a href="{{ route('deck.showCreateDeck') }}">          <span class="material-symbols-outlined">
+            add
+          </span></a>
         <form action="{{ route('auth.handleLogout') }}" method="POST">
           {{ csrfField() }}
-          <button type="submit" id="logout-btn">Se déconnecter</button>
+          <button type="submit" id="logout-btn" style="margin-top: 0px">Se déconnecter</button>
         </form>
       @else
         <a href="{{ route('auth.showLogin') }}">Se connecter</a>

@@ -1,19 +1,28 @@
 @component('components/layout', {title: 'home'})
   <div id="decks">
-    @each((deck, index) in decks)
-      <form action="{{ route('deck.get', {id: deck.id}) }}" method="GET">
-        {{ csrfField() }}
-        <button type="submit">
-          <div class="deck-container">
-            <h4>
-              {{ deck.name }}
-            </h4>
-            <p>
-              {{ deck.description }}
-            </p>
-          </div>
-        </button>
-      </form>
-    @end
-  </div>
+    @if(decks.length > 0)
+      @each((deck, index) in decks)
+        <form action="{{ route('deck.get', {id: deck.id}) }}" method="GET">
+          {{ csrfField() }}
+    <button type="submit">
+            <div class="deck-container">
+              <h4>
+                {{ deck.name }}
+              </h4>
+              <p>
+                {{ deck.description }}
+              </p>
+            </div>
+          </button>
+        </form>
+      @end
+    @else
+      <div id="nodeck">
+        <h3>
+          Vous n'avez pas de deck créé
+        </h3>
+        <a href="{{ route('deck.showCreateDeck') }}">créer un deck</a>
+      </div>
+    </div>
+  @endif
 @endcomponent

@@ -1,8 +1,14 @@
 @component('components/layout', {title: 'create deck'})
-  <form action="{{ route('deck.createDeck') }}" class="form" method="POST">
-    {{ csrfField() }}
-    @!component('components/input', {name : 'name', label : 'Nom du deck'})
-    @!component('components/input', {name : 'description', label : 'description du deck'})
-    <button type="submit">Creer un deck</button>
-  </form>
+  <div id="form-container">
+    <h3>
+      Créer un deck
+    </h3>
+    <form action="{{ route('deck.createDeck') }}" class="form" method="POST">
+      {{ csrfField() }}
+      @!component('components/input', {name : 'name', label : 'Nom du deck'})
+      @!component('components/input', {name : 'description', label : 'description du deck'})
+      <button type="submit">Creer un deck</button>
+    </form>
+  </div>
+
 @endcomponent
