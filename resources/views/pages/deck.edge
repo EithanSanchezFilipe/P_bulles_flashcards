@@ -1,5 +1,31 @@
 @component('components/layout', {title: 'deck'})
-  <h1>
-    deck
-  </h1>
+  <h3>
+    {{ deck.name }}
+  </h3>
+  @if(cards.length > 0)
+    @each((card, index) in cards)
+      <div class="card">
+        <p>
+          Mot
+        </p>
+        <h4>
+          card.key
+        </h4>
+        <p>
+          Définition
+        </p>
+        <h4>
+          card.value
+        </h4>
+      </div>
+    @end
+  @else
+    <div id="nodeck">
+      <h3>
+        Vous n'avez pas de carte créé
+      </h3>
+      <a href="{{ route('deck.showCreateCard') }}">créer une carte</a>
+    </div>
+  </div>
+@endif
 @endcomponent

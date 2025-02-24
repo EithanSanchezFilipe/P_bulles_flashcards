@@ -28,6 +28,6 @@ export default class DecksController {
     await deck.load('card')
     const cards = deck?.card
 
-    return view.render('pages/deck')
+    return view.render('pages/deck', { deck, cards })
   }
 }
