@@ -9,13 +9,13 @@
           Mot
         </p>
         <h4>
-          card.key
+          {{ card.key }}
         </h4>
         <p>
           Définition
         </p>
         <h4>
-          card.value
+          {{ card.value }}
         </h4>
       </div>
     @end
@@ -24,7 +24,8 @@
       <h3>
         Vous n'avez pas de carte créé
       </h3>
-      <a href="{{ route('deck.showCreateCard') }}">créer une carte</a>
+      <a href="{{ route('card.createCard', { id: deck.id }) }}">créer une carte</a>
+
     </div>
   </div>
 @endif

@@ -3,7 +3,7 @@
     <h3>
       Créer un deck
     </h3>
-    <form action="{{ route('deck.createDeck') }}" class="form" method="POST">
+    <form action="{{ route('deck.storeDeck') }}" class="form" method="POST">
       {{ csrfField() }}
       @!component('components/input', {name : 'name', label : 'Nom du deck'})
       @!component('components/input', {name : 'description', label : 'description du deck'})

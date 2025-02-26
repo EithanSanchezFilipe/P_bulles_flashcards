@@ -6,7 +6,10 @@ import { deckValidator } from '#validators/deck'
 import { dd } from '@adonisjs/core/services/dumper'
 
 export default class DecksController {
-  async createDeck({ auth, request, response, view }: HttpContext) {
+  async create({ view }: HttpContext) {
+    view.render('pages/create_deck')
+  }
+  async store({ auth, request, response, view }: HttpContext) {
     const user = await auth.use('web').user
     const { name, description } = await request.validateUsing(deckValidator)
 
@@ -14,20 +17,26 @@ export default class DecksController {
 
     response.redirect('/')
   }
+  async getDeckById({ params, view, auth }: HttpContext) {
+    const user = await auth.use('web').user
+    const deck = await Deck.find(params.id)
 
+    if (deck?.userId === user?.id) {
+      await deck?.load('card')
+      const cards = deck?.card
+
+      return view.render('pages/deck', { deck, cards })
+    } else {
+      await user?.load('decks')
+      const decks = user?.decks
+      return view.render('pages/home', { decks })
+    }
+  }
   async getAllDecks({ auth, response, view }: HttpContext) {
     const user = await auth.use('web').user
 
     await user?.load('decks')
     const decks = user?.decks
     return view.render('pages/home', { decks })
-  }
-  async getDeckById({ params, view }: HttpContext) {
-    const deck = await Deck.findOrFail(params.id)
-
-    await deck.load('card')
-    const cards = deck?.card
-
-    return view.render('pages/deck', { deck, cards })
   }
 }
