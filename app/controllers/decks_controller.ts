@@ -11,9 +11,9 @@ export default class DecksController {
   }
   async store({ auth, request, response, view }: HttpContext) {
     const user = await auth.use('web').user
-    const { name, description } = await request.validateUsing(deckValidator)
+    const { name, description } = await request.validateUsing(deckValidator(user?.id))
 
-    Deck.create({ description: description, name: name, user_id: user.id })
+    Deck.create({ description: description, name: name, user_id: user?.id })
 
     response.redirect('/')
   }

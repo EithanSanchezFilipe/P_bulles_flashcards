@@ -23,4 +23,5 @@ export const customErrorMessage = new SimpleMessagesProvider({
   // Erreurs pour les validations uniques (comme l\'email ou le nom d\'utilisateur déjà pris)
   'username.unique': "Ce nom d'utilisateur est déjà pris.",
   'email.unique': 'Cet email est déjà associé à un compte.',
+  'name.unique': 'Vous avez déjà utilisé ce nom.',
 })
