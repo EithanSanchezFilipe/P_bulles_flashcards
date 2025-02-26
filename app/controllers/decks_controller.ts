@@ -7,7 +7,7 @@ import { dd } from '@adonisjs/core/services/dumper'
 
 export default class DecksController {
   async create({ view }: HttpContext) {
-    view.render('pages/create_deck')
+    return view.render('pages/create_deck')
   }
   async store({ auth, request, response, view }: HttpContext) {
     const user = await auth.use('web').user

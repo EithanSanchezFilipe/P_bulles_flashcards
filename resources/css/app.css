@@ -252,11 +252,13 @@ input[type='password'] {
 #user-buttons a:focus span.material-symbols-outlined {
   outline: 2px solid #4caf50;
 }
+
 #nodeck {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+
 #nodeck a {
   padding: 10px 20px;
   background-color: #4caf50;
@@ -265,5 +267,60 @@ input[type='password'] {
 }
 
 #nodeck a:hover {
+  background-color: #45a049;
+}
+.card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 20px 0;
+  width: 100%;
+  max-width: 600px;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card p {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.card h4 {
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Centering the deck container */
+#deck-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+a.button {
+  display: inline-block;
+  padding: 10px 20px;
+  margin-top: 20px;
+  background-color: #4caf50;
+  color: white;
+  text-align: center;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+a.button:hover {
   background-color: #45a049;
 }

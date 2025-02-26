@@ -1,32 +1,33 @@
 @component('components/layout', {title: 'deck'})
-  <h3>
-    {{ deck.name }}
-  </h3>
-  @if(cards.length > 0)
-    @each((card, index) in cards)
-      <div class="card">
-        <p>
-          Mot
-        </p>
-        <h4>
-          {{ card.key }}
-        </h4>
-        <p>
-          Définition
-        </p>
-        <h4>
-          {{ card.value }}
-        </h4>
+  <div id="deck-container">
+    <h3>
+      {{ deck.name }}
+    </h3>
+    @if(cards.length > 0)
+      @each((card, index) in cards)
+        <div class="card">
+          <p>
+            Mot
+          </p>
+          <h4>
+            {{ card.key }}
+          </h4>
+          <p>
+            Définition
+          </p>
+          <h4>
+            {{ card.value }}
+          </h4>
+        </div>
+      @end
+      <a href="{{ route('card.createCard', { id: deck.id }) }}" class="button">créer une carte</a>
+    @else
+      <div id="nodeck">
+        <h3>
+          Vous n'avez pas de carte créé
+        </h3>
+        <a href="{{ route('card.createCard', { id: deck.id }) }}">créer une carte</a>
       </div>
-    @end
-  @else
-    <div id="nodeck">
-      <h3>
-        Vous n'avez pas de carte créé
-      </h3>
-      <a href="{{ route('card.createCard', { id: deck.id }) }}">créer une carte</a>
-
-    </div>
+    @endif
   </div>
-@endif
 @endcomponent

@@ -5,9 +5,9 @@
     </h3>
     <form action="{{ route('card.storeCard', {id: deck.id}) }}" class="form" method="POST">
       {{ csrfField() }}
-      <input value="{{ deck }}" hidden />
-      @!component('components/input', {name : 'name', label : 'Mot'})
-      @!component('components/input', {name : 'description', label : 'Définition'})
+      <input value="{{ deck.id }}" hidden name="deck" />
+      @!component('components/input', {name : 'key', label : 'Mot'})
+      @!component('components/input', {name : 'value', label : 'Définition'})
       <button type="submit">Creer une carte</button>
     </form>
   </div>
