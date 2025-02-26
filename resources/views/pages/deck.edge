@@ -4,22 +4,27 @@
       {{ deck.name }}
     </h3>
     @if(cards.length > 0)
-      @each((card, index) in cards)
-        <div class="card">
-          <p>
-            Mot
-          </p>
-          <h4>
-            {{ card.key }}
-          </h4>
-          <p>
-            Définition
-          </p>
-          <h4>
-            {{ card.value }}
-          </h4>
-        </div>
-      @end
+      <ul>
+        @each((card, index) in cards)
+          <li class="card {{ index % 2 == 0 ? 'small' : 'large' }}">
+            <p>
+              ID: {{ card.id }}
+            </p>
+            <p>
+              Mot
+            </p>
+            <h4>
+              {{ card.key }}
+            </h4>
+            <p>
+              Définition
+            </p>
+            <h4>
+              {{ card.value }}
+            </h4>
+          </li>
+        @end
+      </ul>
       <a href="{{ route('card.createCard', { id: deck.id }) }}" class="button">créer une carte</a>
     @else
       <div id="nodeck">

@@ -274,7 +274,7 @@ input[type='password'] {
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  margin: 20px 0;
+  margin: 10px 0;
   width: 100%;
   max-width: 600px;
   transition:
@@ -285,6 +285,7 @@ input[type='password'] {
 .card:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
 }
 
 .card p {
@@ -300,6 +301,18 @@ input[type='password'] {
   margin-bottom: 20px;
 }
 
+/* Small list item */
+.card.small {
+  padding: 10px;
+  max-width: 300px;
+}
+
+/* Large list item */
+.card.large {
+  padding: 30px;
+  max-width: 800px;
+}
+
 /* Centering the deck container */
 #deck-container {
   display: flex;
@@ -307,6 +320,22 @@ input[type='password'] {
   align-items: center;
   padding: 20px;
 }
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  width: 100%;
+  max-width: 600px;
+}
+
+li.card {
+  margin: 10px 0;
+}
+
+li {
+  width: 100%;
+}
+
 a.button {
   display: inline-block;
   padding: 10px 20px;
@@ -323,4 +352,50 @@ a.button {
 
 a.button:hover {
   background-color: #45a049;
+}
+
+.card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 10px 0;
+  width: 100%;
+  max-width: 600px;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+.card p {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.card h4 {
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Small list item */
+.card.small {
+  padding: 10px;
+  max-width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Large list item */
+.card.large {
+  padding: 30px;
+  max-width: 800px;
 }
