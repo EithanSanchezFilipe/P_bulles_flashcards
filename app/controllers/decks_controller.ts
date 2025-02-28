@@ -15,7 +15,7 @@ export default class DecksController {
 
     Deck.create({ description: description, name: name, user_id: user?.id })
 
-    response.redirect('/')
+    response.redirect().toRoute('home')
   }
   async getDeckById({ params, view, auth }: HttpContext) {
     const user = await auth.use('web').user
