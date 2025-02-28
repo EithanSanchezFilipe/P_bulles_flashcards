@@ -13,7 +13,7 @@ export default class DecksController {
     const user = await auth.use('web').user
     const { name, description } = await request.validateUsing(deckValidator(user?.id))
 
-    Deck.create({ description: description, name: name, user_id: user?.id })
+    await Deck.create({ description: description, name: name, user_id: user?.id })
 
     response.redirect().toRoute('home')
   }

@@ -12,7 +12,7 @@ export default class CardsController {
   }
   async store({ auth, request, response, view }: HttpContext) {
     const { key, value, deck } = await request.validateUsing(cardValidator)
-    Card.create({ key: key, value: value, deck_id: deck })
+    await Card.create({ key: key, value: value, deck_id: deck })
 
     response.redirect('/deck/' + deck)
   }
