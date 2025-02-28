@@ -314,57 +314,42 @@ input[type='password'] {
 }
 
 /* Centering the deck container */
+/* Styles pour le conteneur de cartes */
 #deck-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 20px;
+  width: 100%; /* Assure que le conteneur prend toute la largeur disponible */
 }
 
+/* Modifier l'ul pour une disposition en grille et centrer le contenu */
 ul {
   list-style-type: none;
   padding: 0;
   width: 100%;
-  max-width: 600px;
+  max-width: 1200px; /* Largeur maximale */
+  display: grid; /* Utiliser une grille */
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Disposition responsive avec des cartes d'au moins 280px de largeur */
+  gap: 20px; /* Espacement entre les cartes */
+  justify-items: center; /* Centrer les cartes horizontalement */
+  align-items: start; /* Aligner les cartes en haut */
+  justify-content: center; /* Centrer la grille horizontalement */
+  align-content: start; /* Centrer la grille verticalement si nécessaire */
 }
 
+/* Styles pour les éléments li de la liste de cartes */
 li.card {
-  margin: 10px 0;
+  margin: 0;
 }
 
-li {
-  width: 100%;
-}
-
-a.button {
-  display: inline-block;
-  padding: 10px 20px;
-  margin-top: 20px;
-  background-color: #4caf50;
-  color: white;
-  text-align: center;
-  border-radius: 5px;
-  text-decoration: none;
-  font-size: 16px;
-  font-weight: bold;
-  transition: background-color 0.3s ease;
-}
-
-a.button:hover {
-  background-color: #45a049;
-}
-
+/* Styles de chaque carte */
 .card {
   background-color: #ffffff;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  margin: 10px 0;
-  width: 100%;
-  max-width: 600px;
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .card:hover {
@@ -386,16 +371,33 @@ a.button:hover {
   margin-bottom: 20px;
 }
 
-/* Small list item */
+/* Styles pour les cartes petites */
 .card.small {
   padding: 10px;
   max-width: 300px;
-  margin-left: auto;
-  margin-right: auto;
 }
 
-/* Large list item */
+/* Styles pour les cartes larges */
 .card.large {
   padding: 30px;
   max-width: 800px;
+}
+
+/* Ajustement pour le bouton "créer une carte" */
+a.button {
+  display: inline-block;
+  padding: 10px 20px;
+  margin-top: 20px;
+  background-color: #4caf50;
+  color: white;
+  text-align: center;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+a.button:hover {
+  background-color: #45a049;
 }

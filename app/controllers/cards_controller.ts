@@ -16,4 +16,16 @@ export default class CardsController {
 
     response.redirect('/deck/' + deck)
   }
+  async destroy({ view, request, response }: HttpContext) {
+    //TODO : vérifier que c'est une carte appartenant à l'utilisateur
+    const id = await request.param('id')
+    const cardId = await request.param('cardId')
+
+    //Carte
+    const card = await Card.find(cardId)
+
+    await card?.delete()
+
+    return response.redirect().toRoute('deck.get', { id: id })
+  }
 }

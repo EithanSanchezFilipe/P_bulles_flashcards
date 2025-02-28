@@ -6,7 +6,7 @@
     @if(cards.length > 0)
       <ul>
         @each((card, index) in cards)
-          <li class="card {{ index % 2 == 0 ? 'small' : 'large' }}">
+          <li class="card small">
             <p>
               ID: {{ card.id }}
             </p>
@@ -23,6 +23,10 @@
               {{ card.value }}
             </h4>
           </li>
+          <form action="{{ route('card.delete', {id: deck.id, cardId: card.id}) }}?_method=DELETE" method="POST">
+            {{ csrfField() }}
+              <button type=Submit>Delete</button>
+          </form>
         @end
       </ul>
       <a href="{{ route('card.createCard', { id: deck.id }) }}" class="button">créer une carte</a>
