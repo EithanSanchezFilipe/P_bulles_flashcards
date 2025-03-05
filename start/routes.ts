@@ -40,5 +40,12 @@ router
   .post('/deck/:id/card', [CardsController, 'store'])
   .as('card.storeCard')
   .use(middleware.auth())
+router
+  .get('/deck/card/:id', [CardsController, 'getCard'])
+  .as('card.showCard')
+  .use(middleware.auth())
 
-  router.delete('/deck/:id/card/:cardId', [CardsController, 'destroy']).as('card.delete').use(middleware.auth())
+router
+  .delete('/deck/:id/card/:cardId', [CardsController, 'destroy'])
+  .as('card.delete')
+  .use(middleware.auth())

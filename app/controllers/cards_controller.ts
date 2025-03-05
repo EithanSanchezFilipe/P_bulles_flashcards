@@ -28,4 +28,10 @@ export default class CardsController {
 
     return response.redirect().toRoute('deck.get', { id: id })
   }
+  async getCard({ view, request }: HttpContext) {
+    const id = await request.param('id')
+
+    const card = await Card.find(id)
+    return view.render('pages/card', { card })
+  }
 }
