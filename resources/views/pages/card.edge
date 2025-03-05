@@ -1,11 +1,12 @@
 @component('components/layout', {title: 'card'})
   <style>
+    /* Card container setup */
+    
     .card {
       width: 500px;
       height: 300px;
-      margin: 80px auto;
-      perspective: 1000px;
-      /* Ajout de la perspective pour l'effet 3D */
+      margin: 0px auto;
+      perspective: 1200px;
     }
     
     .card-inner {
@@ -13,8 +14,7 @@
       width: 100%;
       height: 100%;
       text-align: center;
-      transition: transform 0.8s ease-in-out;
-      /* Transition plus fluide */
+      transition: transform 0.6s ease;
       transform-style: preserve-3d;
       cursor: pointer;
     }
@@ -33,30 +33,26 @@
       align-items: center;
       justify-content: center;
       font-size: 24px;
-      color: #333;
       font-weight: bold;
+      color: #333;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 10px;
     }
     
     .card-back {
       transform: rotateY(180deg);
       background-color: #f4f4f4;
+      color: #555;
     }
     
     .card-front {
       background-color: #fff;
       border: 1px solid #ccc;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-    
-    .card-back {
-      background-color: #f4f4f4;
-      border-radius: 8px;
     }
     
     .card:hover {
       transform: scale(1.05);
-      /* Effet de zoom au survol */
       transition: transform 0.3s ease-in-out;
     }
     
@@ -64,12 +60,12 @@
       background-color: transparent;
       border: none;
       cursor: pointer;
-      font-size: 20px;
-      padding: 10px;
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      font-size: 18px;
+      padding: 12px 20px;
+      margin-top: 20px;
+      color: #333;
+      font-weight: bold;
+      transition: color 0.3s ease;
     }
     
     button:hover {
@@ -80,12 +76,52 @@
       font-size: 24px;
       transition: transform 0.3s ease-in-out;
     }
+    
+    form button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    form button span {
+      margin-right: 8px;
+    }
+    
+    @media (max-width: 600px) {
+      .card {
+        width: 90%;
+        height: auto;
+      }
+    
+      .card-front,
+      .card-back {
+        font-size: 20px;
+      }
+    
+      button {
+        font-size: 16px;
+        padding: 8px 16px;
+      }
+    }
+    
+    /* New styles to center the 'Modifier' button */
+    
+    .modifier-button-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
   </style>
+
+  <!-- Back Button to go back to the deck -->
   <form action="{{ route('deck.get', {id: card.deckId}) }}">
-    <button type="submit">      <span class="material-symbols-outlined">
-        arrow_back_ios
-        </span></button>
+    <button type="submit">
+      <span class="material-symbols-outlined">arrow_back_ios</span>
+      Back to Deck
+    </button>
   </form>
+
+  <!-- The flipping card -->
   <div class="card" onclick="this.classList.toggle('flipped')">
     <div class="card-inner">
       <div class="card-front">
@@ -96,4 +132,12 @@
       </div>
     </div>
   </div>
+
+  <!-- Modify Card Button, centered -->
+  <div class="modifier-button-container">
+    <form action="{{ route('card.update', {id:card.id}) }}">
+      <button type="submit">Modifier</button>
+    </form>
+  </div>
+
 @endcomponent

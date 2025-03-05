@@ -49,3 +49,11 @@ router
   .delete('/deck/:id/card/:cardId', [CardsController, 'destroy'])
   .as('card.delete')
   .use(middleware.auth())
+router
+  .get('/deck/card/:id/update', [CardsController, 'update'])
+  .as('card.update')
+  .use(middleware.auth())
+router
+  .post('/deck/card/:id/update', [CardsController, 'edit'])
+  .as('card.edit')
+  .use(middleware.auth())

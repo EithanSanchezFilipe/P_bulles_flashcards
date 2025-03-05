@@ -1,20 +1,19 @@
 @component('components/layout', {title: 'create deck'})
-  <form action="{{ route('deck.get', {id: deck.id}) }}">
+  <form action="{{ route('card.showCard', {id: card.id }) }}">
     <button type="submit">      <span class="material-symbols-outlined">
         arrow_back_ios
       </span></button>
   </form>
+  <script>
+    
+  </script>
   <div id="form-container">
-
     <h3>
-      Nouvelle carte pour {{deck.name}}
+      Modifier une carte
     </h3>
-    <form action="{{ route('card.storeCard', {id: deck.id}) }}" class="form" method="POST">
-      {{ csrfField() }}
-      <input value="{{ deck.id }}" hidden name="deck" />
-      @!component('components/input', {name : 'key', label : 'Mot'})
-      @!component('components/input', {name : 'value', label : 'Définition'})
-      <button type="submit" class="create-btn">Creer une carte</button>
+
+    <form action="{{ route('card.edit', {id: card.id }) }}" class="form" method="POST">
+      @include('partials/create-update-card')
     </form>
   </div>
   <style>
