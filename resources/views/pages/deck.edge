@@ -32,10 +32,18 @@
               action="{{ route('card.delete', {id: deck.id, cardId: card.id}) }}?_method=DELETE"
               method="POST"
               class="delete-form"
+              id="delete-form-{{ card.id }}"
+              style="display:none;"
+              Hide
+              the
+              form
+              initially
             >
+              >
               {{ csrfField() }}
               <button type="submit" class="cta delete-button">Delete</button>
             </form>
+            <button type="button" class="cta delete-button" onclick="showConfirmation({{ card.id }})">Delete</button>
           </li>
         @end
       </ul>
@@ -49,120 +57,207 @@
       </div>
     @endif
   </div>
-  <style>#deck-container {
-    padding: 20px;
-    max-width: 1000px;
-    margin: 0 auto;
-    font-family: Arial, sans-serif;
-  }
-  
-  h3 {
-    font-size: 24px;
-    margin-bottom: 20px;
-    color: #333;
-  }
-  
-  .card-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Cards in grid with flexible size */
-    gap: 15px;
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .card-item {
-    display: flex;
-    flex-direction: column;
-    background-color: #f9f9f9;
-    padding: 10px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  }
-  .card-item:hover {
-    background-color:rgb(240, 240, 240) ;
-    cursor: pointer;
-  }
 
-  .card-button {
-    all: unset;
-    display: block;
-    width: 100%;
-  }
-  
-  .card-content {
-    padding: 10px;
-  }
-  
-  .card-id, .card-label {
-    font-size: 12px;
-    color: #666;
-  }
-  
-  .card-key, .card-value {
-    font-size: 14px;
-    font-weight: bold;
-    margin: 5px 0;
-  }
-  
-  .cta {
-    background-color: #ff4d4d;
-    color: white;
-    padding: 8px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    text-align: center;
-    display: block;
-    width: 100%;
-  }
-  
-  .cta:hover {
-    background-color: #e60000;
-  }
-  
-  .delete-button {
-    background-color: #e60000;
-    font-size: 12px;
-    margin-top: 10px;
-  }
-  
-  .delete-button:hover {
-    background-color: #d30000;
-  }
-  
-  .create-card-button {
-    background-color: #4CAF50;
-    color: white;
-    text-align: center;
-    display: inline-block;
-    padding: 10px 20px;
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: bold;
-    margin-top: 20px;
-  }
-  
-  .create-card-button:hover {
-    background-color: #45a049;
-  }
-  
-  .no-cards {
-    text-align: center;
-    padding: 20px;
-  }
-  
-  .no-cards a {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: bold;
-  }
-  
-  .no-cards a:hover {
-    background-color: #45a049;
-  }
+  <!-- Confirmation Dialog -->
+  <div id="confirmation-dialog" class="confirmation-dialog">
+    <div class="confirmation-content">
+      <p>
+        Êtes-vous sûr de vouloir supprimer cette carte ?
+      </p>
+      <button onclick="confirmDelete()">Oui, supprimer</button>
+      <button onclick="cancelDelete()">Annuler</button>
+    </div>
+  </div>
+
+  <style>
+    #deck-container {
+      padding: 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+      font-family: Arial, sans-serif;
+    }
+    
+    h3 {
+      font-size: 24px;
+      margin-bottom: 20px;
+      color: #333;
+    }
+    
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      /* Cards in grid with flexible size */
+      gap: 15px;
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .card-item {
+      display: flex;
+      flex-direction: column;
+      background-color: #f9f9f9;
+      padding: 10px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    
+    .card-item:hover {
+      background-color: rgb(240, 240, 240);
+      cursor: pointer;
+    }
+    
+    .card-button {
+      all: unset;
+      display: block;
+      width: 100%;
+    }
+    
+    .card-content {
+      padding: 10px;
+    }
+    
+    .card-id,
+    .card-label {
+      font-size: 12px;
+      color: #666;
+    }
+    
+    .card-key,
+    .card-value {
+      font-size: 14px;
+      font-weight: bold;
+      margin: 5px 0;
+    }
+    
+    .cta {
+      background-color: #ff4d4d;
+      color: white;
+      padding: 8px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      text-align: center;
+      display: block;
+      width: 100%;
+    }
+    
+    .cta:hover {
+      background-color: #e60000;
+    }
+    
+    .delete-button {
+      background-color: #e60000;
+      font-size: 12px;
+      margin-top: 10px;
+    }
+    
+    .delete-button:hover {
+      background-color: #d30000;
+    }
+    
+    .create-card-button {
+      background-color: #4CAF50;
+      color: white;
+      text-align: center;
+      display: inline-block;
+      padding: 10px 20px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+    
+    .create-card-button:hover {
+      background-color: #45a049;
+    }
+    
+    .no-cards {
+      text-align: center;
+      padding: 20px;
+    }
+    
+    .no-cards a {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    
+    .no-cards a:hover {
+      background-color: #45a049;
+    }
+    
+    .confirmation-dialog {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    
+    .confirmation-content {
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+      text-align: center;
+    }
+    
+    .confirmation-content button {
+      padding: 10px 20px;
+      margin: 5px;
+      font-size: 14px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    
+    .confirmation-content button:first-child {
+      background-color: #e60000;
+      color: white;
+    }
+    
+    .confirmation-content button:first-child:hover {
+      background-color: #d30000;
+    }
+    
+    .confirmation-content button:last-child {
+      background-color: #4CAF50;
+      color: white;
+    }
+    
+    .confirmation-content button:last-child:hover {
+      background-color: #45a049;
+    }
   </style>
+
+  <script>
+    let cardIdToDelete = null;
+    // Show confirmation dialog
+    
+    function showConfirmation(cardId) {
+      cardIdToDelete = cardId;
+      document.getElementById("confirmation-dialog").style.display = "flex";
+    }
+    // Confirm deletion
+    
+    function confirmDelete() {
+      // Submit the form to delete the card
+      const form = document.getElementById("delete-form-" + cardIdToDelete);
+      form.submit();
+    }
+    // Cancel deletion
+    
+    function cancelDelete() {
+      // Hide the confirmation dialog
+      document.getElementById("confirmation-dialog").style.display = "none";
+    }
+  </script>
 @endcomponent

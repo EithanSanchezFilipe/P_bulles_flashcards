@@ -11,10 +11,11 @@ export default class CardsController {
     return view.render('pages/create_card', { deck })
   }
   async store({ auth, request, response, view }: HttpContext) {
-    const { key, value, deck } = await request.validateUsing(cardValidator)
-    await Card.create({ key: key, value: value, deck_id: deck })
+    const id = await request.param('id')
+    const { key, value } = await request.validateUsing(cardValidator(id))
+    await Card.create({ key: key, value: value, deck_id: id })
 
-    response.redirect('/deck/' + deck)
+    response.redirect('/deck/' + id)
   }
   async destroy({ view, request, response }: HttpContext) {
     //TODO : vérifier que c'est une carte appartenant à l'utilisateur
