@@ -10,14 +10,14 @@ export default class CardsController {
     const deck = await Deck.find(params.id)
     return view.render('pages/create-card', { deck })
   }
-  async store({ auth, request, response, view }: HttpContext) {
+  async store({ request, response }: HttpContext) {
     const id = await request.param('id')
-    const { key, value } = await request.validateUsing(cardValidator(id))
-    await Card.create({ key: key, value: value, deck_id: id })
+    const { key, value } = await request.validateUsing(cardValidator(id, null))
+    await Card.create({ key: key, value: value, deckId: id })
 
     response.redirect('/deck/' + id)
   }
-  async destroy({ view, request, response }: HttpContext) {
+  async destroy({ request, response }: HttpContext) {
     //TODO : vérifier que c'est une carte appartenant à l'utilisateur
     const id = await request.param('id')
     const cardId = await request.param('cardId')
@@ -35,18 +35,18 @@ export default class CardsController {
     const card = await Card.find(id)
     return view.render('pages/card', { card })
   }
-  async update({ view, request, response, params, auth }: HttpContext) {
+  async update({ view, params }: HttpContext) {
     const card = await Card.find(params.id)
     return view.render('pages/update-card', { card })
   }
-  async edit({ view, request, response, params }: HttpContext) {
+  async edit({ request, response, params }: HttpContext) {
     const card = await Card.find(params.id)
     const { key, value } = await request.validateUsing(cardValidator(card?.deckId, card?.id))
 
     dd
-    card.merge({ key, value })
-    await card.save()
+    card?.merge({ key, value })
+    await card?.save()
 
-    return response.redirect().toRoute('deck.get', { id: card.deckId })
+    return response.redirect().toRoute('deck.get', { id: card?.deckId })
   }
 }

@@ -1,31 +1,28 @@
 import vine from '@vinejs/vine'
-const cardValidator = (deckId, cardId) => {
+const cardValidator = (deckId: number | undefined, cardId: number | null | undefined) => {
   return vine.compile(
     vine.object({
       key: vine
         .string()
         .minLength(10)
         .unique(async (db, value) => {
-          if (cardId) {
-            // If cardId is provided, we're updating an existing card
+          if (cardId && deckId != undefined) {
             const existingCard = await db
               .from('cards')
               .where('key', value)
               .andWhere('deck_id', deckId)
-              .andWhere('id', '!=', cardId) // Exclude the current card being updated
+              .andWhere('id', '!=', cardId)
               .first()
-
-            return !existingCard // Allow if no other card has the same key
-          } else {
-            // If cardId is not provided, we're creating a new card
+            return !existingCard
+          } else if (deckId) {
             const existingCard = await db
               .from('cards')
               .where('key', value)
               .andWhere('deck_id', deckId)
               .first()
-
-            return !existingCard // Allow if no card has the same key
+            return !existingCard
           }
+          return false
         }),
       value: vine.string(),
     })
