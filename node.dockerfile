@@ -18,6 +18,7 @@ WORKDIR /app
 COPY --from=deps /app/node_modules /app/node_modules
 ADD . .
 RUN node ace build
+LS
 
 # Production stage
 FROM base
