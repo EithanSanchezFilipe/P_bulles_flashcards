@@ -12,7 +12,6 @@ import AuthController from '#controllers/auth_controller'
 import DecksController from '#controllers/decks_controller'
 import CardsController from '#controllers/cards_controller'
 import { middleware } from './kernel.js'
-import Card from '#models/card'
 
 router.get('/', [DecksController, 'getAllDecks']).as('home').use(middleware.auth())
 router.on('/login').render('pages/login').as('auth.showLogin').use(middleware.guest())

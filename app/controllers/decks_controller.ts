@@ -1,19 +1,17 @@
 // import type { HttpContext } from '@adonisjs/core/http'
 import type { HttpContext } from '@adonisjs/core/http'
-import User from '#models/user'
 import Deck from '#models/deck'
 import { deckValidator } from '#validators/deck'
-import { dd } from '@adonisjs/core/services/dumper'
 
 export default class DecksController {
   async create({ view }: HttpContext) {
     return view.render('pages/create_deck')
   }
-  async store({ auth, request, response, view }: HttpContext) {
+  async store({ auth, request, response }: HttpContext) {
     const user = await auth.use('web').user
     const { name, description } = await request.validateUsing(deckValidator(user?.id))
 
-    await Deck.create({ description: description, name: name, user_id: user?.id })
+    await Deck.create({ description: description, name: name, userId: user?.id })
 
     response.redirect().toRoute('home')
   }
@@ -32,7 +30,7 @@ export default class DecksController {
       return view.render('pages/home', { decks })
     }
   }
-  async getAllDecks({ auth, response, view }: HttpContext) {
+  async getAllDecks({ auth, view }: HttpContext) {
     const user = await auth.use('web').user
 
     await user?.load('decks')
