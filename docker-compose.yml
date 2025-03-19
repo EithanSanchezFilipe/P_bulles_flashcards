@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+    web:
+        build:
+            context: .
+            dockerfile: node.dockerfile
+        environment:
+          - HOST=0.0.0.0
+          - LOG_LEVEL=info
+          - APP_KEY=g8OxQEwzbb81FrtTKrHoH0s_G_bqon0E
+          - PORT=8080
+          - SESSION_DRIVER=cookie
+          - NODE_ENV=production
+          - DB_HOST=db
+          - DB_USER=root
+          - DB_PASSWORD=root
+          - DB_DATABASE=db
+          - DB_PORT=3306
+        ports:
+            - "8080:8080"
+        depends_on:
+            - db
+        networks:
+            - app-network
+        command: /bin/sh -c "node ace migration:run --force && node ./bin/server.js"
+    
+    
+    db:
+        image: mysql:8.0.30
+        container_name: db_p_bulles
+        environment:
+            MYSQL_ROOT_USER: root
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: db
+        restart: always
+        ports:
+            - "6033:3306"
+        volumes:
+            - dbdata:/var/lib/mysql
+        networks:
+            - app-network
+            
+networks:
+    app-network:
+        driver: bridge
+        
+volumes:
+    dbdata:
